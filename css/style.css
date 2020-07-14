@@ -1,0 +1,84 @@
+*{
+    padding: 0%;
+    margin: 0%;
+}
+
+#flappyBird{
+    width: 500px;
+    height: 600px;
+    border: 1px solid black;
+    margin: auto;
+    overflow: hidden;
+}
+
+#flappyBird-block{
+    height: 600px;
+    width: 50px;
+    background-color:greenyellow;
+    position: relative;
+    left: 500px;    
+    /*The animation has the same speed from start to end */
+    /* animation: blockmover 1s infinite linear; */
+}
+
+#flappyBird-hole{    
+    height: 150px;
+    width: 50px;
+    background-color: white;
+    position: relative;
+    left: 500px;
+    top: -550px;
+    /* animation: blockmover 1s infinite linear; */
+}
+
+#flappyBird-character{
+    position: absolute;
+    /* background: transparent url(../images/flappy-base.png) repeat-x top left;
+    width: 57px;
+    height: 41px; */
+    height: 20px;
+    width: 20px;
+    background-color: blue; 
+    top: 300px;    
+    border-radius: 50%;
+}
+
+#startButton{
+    margin: auto;
+    width: 75px;
+    height: 30px;
+    color: white;
+    background-color: darkgray;
+    box-sizing: azure;
+    border-radius: 10px;
+}
+
+#contents{
+    text-align: center;
+}
+
+#gameover-box{    
+    background:#e1e1e1; 
+    margin: 0 auto;
+    width:160px; 
+    position:relative; 
+    z-index:1;
+    top: -51%;
+    padding:30px; 
+    -webkit-box-shadow:0 0 10px rgba(0,0,0,0.4);
+    -moz-box-shadow:0 0 10px rgba(0,0,0,0.4); 
+    box-shadow:0 0 10px rgba(0,0,0,0.4);
+    display: none;
+    margin-top: 4px;
+}
+
+
+.move-animation{
+    animation: blockmover 2s infinite linear;
+}
+
+@keyframes blockmover{
+    /* We start from right side, and want to hide the block in left */
+    0%{left: 500px;}
+    100%{left: -50px;}
+}
