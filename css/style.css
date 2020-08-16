@@ -3,82 +3,132 @@
     margin: 0%;
 }
 
+:root{
+    --game-width: 640px;
+    --game-height: 360px;
+
+    --bird-width: 57px;
+    --bird-height: 41px;
+
+    --block-hole-width: 70px;
+}
+
+.game-container{
+    display: grid;
+    grid-template-rows: 100px var(--game-height) auto;
+    grid-template-columns: 1fr var(--game-width) 1fr;
+    grid-template-areas: 
+        ". title ."
+        ". game ."
+        ". footer ."
+}
+
+#game-title{
+    grid-area: title;
+
+    display: grid;
+    place-items: center;    
+}
+
 #flappyBird{
-    width: 500px;
-    height: 600px;
+    grid-area: game;
+    width: 100%;
+    height: 100%;
     border: 1px solid black;
+    background-image: url("../images/background.png");
+    background-size: cover;
     margin: auto;
     overflow: hidden;
+    z-index: -1;
 }
 
 #flappyBird-block{
-    height: 600px;
-    width: 50px;
-    background-color:greenyellow;
-    position: relative;
-    left: 500px;    
-    /*The animation has the same speed from start to end */
-    /* animation: blockmover 1s infinite linear; */
+    height: var(--game-height);
+    width: var(--block-hole-width); 
+    z-index: 1;
+    /* background-image: url("../images/block.jpg");
+    background-size: cover; */
+    overflow: hidden;
+    position: relative;    
+    left: var(--game-width); /* Starts from far out right of the console */    
+    /* The animation has the same speed from start to end */
+    /* animation: blockmover 2s infinite linear;  */
+}
+#flappyBird_top-block{
+    background-color: red; 
+    /* height sets by js, after calculating the    starting point of hole*/
+}
+
+#flappyBird_block-hole{
+    height: calc(var(--game-height) * 0.25); 
+    width: var(--block-hole-width);
+    background-color: transparent;    
+}
+
+#flappyBird_lower-block{
+    background-color: blue;
+    height: inherit; /* TODO: set with js after hole*/
 }
 
 #flappyBird-hole{    
-    height: 150px;
-    width: 50px;
+    /**/
+    height: calc(var(--game-height) * 0.25); 
+    width: var(--block-hole-width);
     background-color: white;
+    /* background-color: rgba(255, 255, 0, 0.0); */
+    opacity: 0.1;
     position: relative;
-    left: 500px;
-    top: -550px;
+    left: var(--game-width);
+    top: calc( -1 * var(--game-height));  /* TODO: Change 25px if game height changes, as required. Check it/Make it random */
     /* animation: blockmover 1s infinite linear; */
 }
 
 #flappyBird-character{
     position: absolute;
-    /* background: transparent url(../images/flappy-base.png) repeat-x top left;
-    width: 57px;
-    height: 41px; */
-    height: 20px;
-    width: 20px;
-    background-color: blue; 
-    top: 300px;    
-    border-radius: 50%;
+    background-image: url("../images/flappy-base.png");    
+    height: var(--bird-height);
+    width: var(--bird-width);
+    /* Top is calculated like absolute. Adding 100/2 or 50px, considering header height is 100px */
+    top: calc(var(--game-height)/2 + var(--bird-height) + 50px);        
 }
 
 #startButton{
     margin: auto;
-    width: 75px;
-    height: 30px;
+    width: 100px;
+    height: 60px;
     color: white;
-    background-color: darkgray;
+    background-color: #1db558d6;
     box-sizing: azure;
     border-radius: 10px;
+    font-size: 1.5rem;
+    margin-top: 20px;
 }
 
 #contents{
+    grid-area: footer;   
+    padding-top: 5px; 
     text-align: center;
 }
 
-#gameover-box{    
-    background:#e1e1e1; 
-    margin: 0 auto;
-    width:160px; 
-    position:relative; 
-    z-index:1;
-    top: -51%;
-    padding:30px; 
-    -webkit-box-shadow:0 0 10px rgba(0,0,0,0.4);
-    -moz-box-shadow:0 0 10px rgba(0,0,0,0.4); 
-    box-shadow:0 0 10px rgba(0,0,0,0.4);
+#gameover-box{        
     display: none;
-    margin-top: 4px;
+    place-content: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    position: relative;    
+    background: #ffffff96;
+    top: -60%;
+    padding: 20px;
+    margin: 0 auto;
+    width: 160px;
 }
 
 
 .move-animation{
-    animation: blockmover 2s infinite linear;
+    animation: blockmover 3s infinite linear;
 }
 
 @keyframes blockmover{
     /* We start from right side, and want to hide the block in left */
-    0%{left: 500px;}
-    100%{left: -50px;}
+    0%{left: var(--game-width);}
+    100%{left: calc(-1 * var(--block-hole-width));}
 }

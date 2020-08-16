@@ -6,21 +6,29 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/style.css">
 </head>    
-<body>
+<body class="game-container">
+    <div id="game-title">
+        <h2>Flappy Bird</h2>
+    </div>
     <div id="flappyBird">
-        <div id="flappyBird-block"></div>
-        <div id="flappyBird-hole"></div>
+        <div id="flappyBird-block">
+            <div id="flappyBird_top-block"></div>
+            <div id="flappyBird_block-hole"></div>
+            <div id="flappyBird_lower-block"></div>
+        </div>
+        <!-- <div id="flappyBird-hole"></div> -->
         <div id="flappyBird-character"></div>  
+
+        <div id="gameover-box">
+            <p>Game Over!</p>
+            <p>Score: <span id="score"></span></p>        
+        </div> 
     </div>   
     <div id="contents">
         <p>Click inside the gaming console to jump</p>
         <button id="startButton">Start</button>
-    </div>
-    <div id="gameover-box">
-        <p>Game Over!</p>
-        <p>Score: <span id="score"></span></p>        
-    </div>  
-   
+    </div> 
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="js/app.js"></script>
 </html>
